@@ -1,0 +1,6 @@
+sortable/target/
+sortable/.idea/libraries
+sortable/project/target/
+*.class
+*.jar
+*.cache
