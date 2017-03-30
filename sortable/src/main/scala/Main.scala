@@ -33,7 +33,7 @@ object Main {
 
     import spark.implicits._
 
-    val productsDSRaw = spark.read.json("maprfs:///mapr/ri0.comscore.com/user/rshah/learning/products.txt").
+    val productsDSRaw = spark.read.json(args(0)).
       withColumnRenamed(existingName = "announced-date", newName = "announced_date").as[Products]
 
     //converting Products DS to lowercase
@@ -44,7 +44,7 @@ object Main {
                                       row.product_name.toLowerCase)
                                       )
 
-    val listingDSRaw = spark.read.json("maprfs:///mapr/ri0.comscore.com/user/rshah/learning/listings.txt").as[Listing]
+    val listingDSRaw = spark.read.json(args(1)).as[Listing]
 
     // converting Listing DS to lowercase
     val listingDS = listingDSRaw.map(row => Listing(row.currency,
